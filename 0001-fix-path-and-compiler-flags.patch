@@ -1,0 +1,40 @@
+From d133d9c91ce7039faadcf4aaff326cd2136ab0ec Mon Sep 17 00:00:00 2001
+From: Miguel Bernal Marin <miguel.bernal.marin@linux.intel.com>
+Date: Wed, 21 Mar 2018 16:43:12 -0600
+Subject: [PATCH] fix path and compiler flags
+
+---
+ src/Makefile | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/Makefile b/src/Makefile
+index c5279ef..62f3d58 100644
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -1,8 +1,8 @@
+ DESTDIR ?=
+-PREFIX ?= /usr/local
++PREFIX ?= /usr
+ BINDIR = $(PREFIX)/bin
+ SHAREDIR = $(PREFIX)/share/imapfilter
+-MANDIR = $(PREFIX)/man
++MANDIR = $(PREFIX)/share/man
+ 
+ MYCFLAGS =
+ MYLDFLAGS =
+@@ -16,9 +16,9 @@ LIBPCRE = -lpcre
+ LIBSSL = -lssl
+ LIBCRYPTO = -lcrypto
+ 
+-CFLAGS = -Wall -Wextra -O -DCONFIG_SHAREDIR='"$(SHAREDIR)"' $(INCDIRS) $(MYCFLAGS)
+-LDFLAGS = $(LIBDIRS) $(MYLDFLAGS)
+-LIBS = -lm -ldl $(LIBLUA) $(LIBPCRE) $(LIBSSL) $(LIBCRYPTO) $(MYLIBS)
++CFLAGS += -Wall -Wextra -O -DCONFIG_SHAREDIR='"$(SHAREDIR)"' $(INCDIRS) $(MYCFLAGS)
++LDFLAGS += $(LIBDIRS) $(MYLDFLAGS)
++LIBS += $(LIBLUA) $(LIBPCRE) $(LIBSSL) $(LIBCRYPTO) $(MYLIBS) -lm -ldl 
+ 
+ MAN1 = imapfilter.1
+ MAN5 = imapfilter_config.5
+-- 
+2.16.2
+

@@ -1,0 +1,10 @@
+*~
+*.swp
+
+build.log.round*
+mock_*.log
+
+*.gz
+*.xz
+
+results
