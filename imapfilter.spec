@@ -4,7 +4,7 @@
 #
 Name     : imapfilter
 Version  : 2.6.12
-Release  : 3
+Release  : 4
 URL      : https://github.com/lefcha/imapfilter/archive/v2.6.12.tar.gz
 Source0  : https://github.com/lefcha/imapfilter/archive/v2.6.12.tar.gz
 Summary  : No detailed summary available
