@@ -4,16 +4,16 @@
 #
 Name     : imapfilter
 Version  : 2.6.12
-Release  : 4
+Release  : 5
 URL      : https://github.com/lefcha/imapfilter/archive/v2.6.12.tar.gz
 Source0  : https://github.com/lefcha/imapfilter/archive/v2.6.12.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT
-Requires: imapfilter-bin
-Requires: imapfilter-license
-Requires: imapfilter-data
-Requires: imapfilter-man
+Requires: imapfilter-bin = %{version}-%{release}
+Requires: imapfilter-data = %{version}-%{release}
+Requires: imapfilter-license = %{version}-%{release}
+Requires: imapfilter-man = %{version}-%{release}
 BuildRequires : lua-dev
 BuildRequires : openssl-dev
 BuildRequires : pcre-dev
@@ -73,14 +73,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1538588451
+export SOURCE_DATE_EPOCH=1542398712
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1538588451
+export SOURCE_DATE_EPOCH=1542398712
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/imapfilter
-cp LICENSE %{buildroot}/usr/share/doc/imapfilter/LICENSE
+mkdir -p %{buildroot}/usr/share/package-licenses/imapfilter
+cp LICENSE %{buildroot}/usr/share/package-licenses/imapfilter/LICENSE
 %make_install
 
 %files
@@ -103,7 +103,7 @@ cp LICENSE %{buildroot}/usr/share/doc/imapfilter/LICENSE
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/doc/imapfilter/LICENSE
+/usr/share/package-licenses/imapfilter/LICENSE
 
 %files man
 %defattr(0644,root,root,0755)
