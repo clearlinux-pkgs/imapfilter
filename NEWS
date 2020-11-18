@@ -1,3 +1,20 @@
+IMAPFilter 2.7.3 - 14 Nov 2020
+  - Bug fix; incorrect free of compiled pattern.
+  - Unexpected network errors and IMAP BYE are now logged.
+
+IMAPFilter 2.7.2 - 10 Nov 2020
+  - Makefile is back to being Lua version agnostic.
+
+IMAPFilter 2.7.1 - 9 Nov 2020
+  - Makefile now builds with Lua 5.4 and PCRE2.
+
+IMAPFilter 2.7 - 8 Nov 2020
+  - Lua 5.4 compatibility (the codebase can still be compiled with versions
+    5.3, 5.2 and 5.1).
+  - PCRE2 compatibility (version 10.00 and later)
+  - New error code is returned if certificate verify fails.
+  - Bug fix; add missing truststore option from brief usage message.
+
 IMAPFilter 2.6.16 - 23 Nov 2019
   - Bug fix; escape the double-quote character in passwords.
 
