@@ -4,7 +4,7 @@
 #
 Name     : imapfilter
 Version  : 2.7.5
-Release  : 12
+Release  : 13
 URL      : https://github.com/lefcha/imapfilter/archive/v2.7.5/imapfilter-2.7.5.tar.gz
 Source0  : https://github.com/lefcha/imapfilter/archive/v2.7.5/imapfilter-2.7.5.tar.gz
 Summary  : No detailed summary available
@@ -72,7 +72,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1607646197
+export SOURCE_DATE_EPOCH=1615417254
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -85,7 +85,7 @@ make  %{?_smp_mflags}  PREFIX=/usr MYCFLAGS="$CFLAGS"
 
 
 %install
-export SOURCE_DATE_EPOCH=1607646197
+export SOURCE_DATE_EPOCH=1615417254
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/imapfilter
 cp %{_builddir}/imapfilter-2.7.5/LICENSE %{buildroot}/usr/share/package-licenses/imapfilter/44978826bb7fd95c2a248312cd67ee7d0931e890
