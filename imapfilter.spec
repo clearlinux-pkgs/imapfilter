@@ -6,10 +6,10 @@
 # autospec commit: c1050fe
 #
 Name     : imapfilter
-Version  : 2.8.1
-Release  : 18
-URL      : https://github.com/lefcha/imapfilter/archive/v2.8.1/imapfilter-2.8.1.tar.gz
-Source0  : https://github.com/lefcha/imapfilter/archive/v2.8.1/imapfilter-2.8.1.tar.gz
+Version  : 2.8.2
+Release  : 19
+URL      : https://github.com/lefcha/imapfilter/archive/v2.8.2/imapfilter-2.8.2.tar.gz
+Source0  : https://github.com/lefcha/imapfilter/archive/v2.8.2/imapfilter-2.8.2.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT
@@ -69,15 +69,18 @@ man components for the imapfilter package.
 
 
 %prep
-%setup -q -n imapfilter-2.8.1
-cd %{_builddir}/imapfilter-2.8.1
+%setup -q -n imapfilter-2.8.2
+cd %{_builddir}/imapfilter-2.8.2
+pushd ..
+cp -a imapfilter-2.8.2 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1701969559
+export SOURCE_DATE_EPOCH=1703625751
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -94,6 +97,14 @@ ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 make  %{?_smp_mflags}  PREFIX=/usr MYCFLAGS="$CFLAGS"
 
+pushd ../buildavx2
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS -m64 -march=x86-64-v3 "
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS -m64 -march=x86-64-v3 "
+make  %{?_smp_mflags}  PREFIX=/usr MYCFLAGS="$CFLAGS"
+popd
 
 %install
 export GCC_IGNORE_WERROR=1
@@ -110,17 +121,22 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1701969559
+export SOURCE_DATE_EPOCH=1703625751
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/imapfilter
 cp %{_builddir}/imapfilter-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/imapfilter/07789d5e69a7f4ad31a3c083eb36236f0717fcfd || :
+pushd ../buildavx2/
+%make_install_v3 PREFIX=/usr MANDIR=/usr/share/man
+popd
 %make_install PREFIX=/usr MANDIR=/usr/share/man
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/imapfilter
 /usr/bin/imapfilter
 
 %files data
